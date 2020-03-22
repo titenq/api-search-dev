@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const routes = require('./routes');
+
 require('dotenv').config();
 
+const port = process.env.PORT || 3333;
 const dbUser = process.env.DB_USER;
 const dbPass = process.env.DB_PASS;
 const dbHost = process.env.DB_HOST;
@@ -15,11 +18,6 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbHost}/${dbName}?retryWri
 });
 
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  return res.json({ message: 'Hello World!' });
-});
-
-const port = process.env.PORT || 3333;
+app.use(routes);
 
 app.listen(port, () => console.log(`App executando na porta ${port}.`));
