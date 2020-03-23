@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const env = require('dotenv');
 
-require('dotenv').config();
+env.config();
 
 const port = process.env.PORT || 3333;
 const dbUser = process.env.DB_USER;
@@ -14,7 +15,8 @@ const app = express();
 
 mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbHost}/${dbName}?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 app.use(express.json());
