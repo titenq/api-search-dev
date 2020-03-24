@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const routes = require('./routes');
 const env = require('dotenv');
 
@@ -10,6 +11,7 @@ const dbUser = process.env.DB_USER;
 const dbPass = process.env.DB_PASS;
 const dbHost = process.env.DB_HOST;
 const dbName = process.env.DB_Name;
+const origin = process.env.ORIGIN;
 
 const app = express();
 
@@ -19,6 +21,7 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbHost}/${dbName}?retryWri
   useCreateIndex: true
 });
 
+app.use(cors({ origin }));
 app.use(express.json());
 app.use(routes);
 
