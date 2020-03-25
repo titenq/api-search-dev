@@ -21,7 +21,8 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbHost}/${dbName}?retryWri
   useCreateIndex: true
 });
 
-app.use(cors({ origin }));
+/* app.use(cors({ origin })); */
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 
